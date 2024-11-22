@@ -1,0 +1,4 @@
+obs-websocket-py==1.0
+python-dotenv==1.0.0
+pytz==2023.3         # For timezone support if needed
+schedule==1.2.0      # For more advanced scheduling
