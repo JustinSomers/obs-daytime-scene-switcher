@@ -13,6 +13,7 @@ const VIDEO_PATHS = [
   process.env.DAYTIME_VIDEO_PATH || '',
   process.env.EVENING_VIDEO_PATH || '',
   process.env.NIGHTTIME_VIDEO_PATH || '',
+  process.env.EVENING_VIDEO_PATH || '', // Reuse the evening video
 ];
 let currentVideoIdx = 0;
 let activeSourceIdx = 0; // Tracks which source is currently visible (0 or 1)
@@ -81,8 +82,8 @@ async function setInputOpacity(sourceName: string, opacity: number) {
  */
 async function crossfadeToNextVideo() {
   try {
-    const fadeDuration = 20000; // Crossfade duration in milliseconds
-    const steps = 100; // Number of steps in the crossfade for smoother transitions
+    const fadeDuration = 10000; // Crossfade duration in milliseconds
+    const steps = 1000; // Number of steps in the crossfade for smoother transitions
     const interval = fadeDuration / steps;
 
     const nextVideoIdx = (currentVideoIdx + 1) % VIDEO_PATHS.length;
@@ -124,7 +125,7 @@ async function main() {
   await setInputOpacity(BACKGROUND_SOURCES[1], 0.0); // Second source fully transparent
 
   // Crossfade through the videos every 30 seconds
-  setInterval(crossfadeToNextVideo, 40000);
+  setInterval(crossfadeToNextVideo, 60000);
 }
 
 main().catch((error) => console.error('Unhandled error in main:', error));
